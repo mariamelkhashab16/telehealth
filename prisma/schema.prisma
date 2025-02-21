@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model User {
+  id          Int    @id @default(autoincrement()) 
+  username    String
+  password    String
+  phonenumber String @unique
+  roleId      Int  
+
+  role     Role   @relation(fields: [roleId], references: [id])
+
+  // Relations (One-to-One)
+  doctor   Doctor?  
+  patient  Patient? 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id          Int    @id @default(autoincrement())
+  name  String @unique
+  users User[] // virtual field for ORM querying
+}
+
+model Doctor {
+  id          Int    @id @default(autoincrement())
+  userId         Int   @unique
+  bio            String?
+  specializationId Int
+
+  user           User     @relation(fields: [userId], references: [id])
+  specialization Specialization @relation(fields: [specializationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Patient {
+  id          Int    @id @default(autoincrement())
+  userId    Int  @unique
+  weight    Float?
+  height    Float?
+  gender    Gender
+  dateOfBirth       DateTime
+  medicalHistory   String?
+
+  user     User     @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Specialization {
+  id          Int    @id @default(autoincrement())
+  name  String @unique
+  name_ar  String @unique
+
+  doctors Doctor[] // virtual field for ORM querying
+}

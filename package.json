@@ -8,8 +8,14 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "bcryptjs": "^3.0.2",
     "next": "^15.1.7",
+    "pg": "^8.13.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
