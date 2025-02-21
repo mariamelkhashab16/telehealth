@@ -21,7 +21,7 @@ export const SystemDataProvider = ({ children }: { children: React.ReactNode }) 
     try {
       const [rolesData, specializationsData, ] = await Promise.all([
         fetch("/api/auth/role").then((res) => res.json()),
-        fetch("/api/auth/specialization").then((res) => res.json()),
+        fetch("/api/appointments/specialization").then((res) => res.json()),
       ]);
 
       setSystemData({

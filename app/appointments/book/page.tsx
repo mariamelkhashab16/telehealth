@@ -12,7 +12,7 @@ export default function BookAppointments() {
         {specializations.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
             {specializations.map(({ id, name, name_ar }) => (
-              <SpecializationCard key={id} id={id} name={name} nameAr={name_ar} />
+              <SpecializationCard key={id} specId={id} name={name} nameAr={name_ar} />
             ))}
           </div>
         ) : (
