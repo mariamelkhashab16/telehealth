@@ -21,9 +21,10 @@ export default function LoginForm() {
   
       const response = await res.json();
       setLoading(false);
-  
+      
+      console.log(response.data)
       if (res.ok) {
-        window.location.href = "/auth/doctor"
+        // window.location.href = "/auth/doctor"
       } else {
         setError(response.error || "An unknown error occurred.");
       }

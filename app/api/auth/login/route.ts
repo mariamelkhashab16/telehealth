@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { getUserByUsername } from "@/app/services/auth"
+import { getUserByUsername } from "@/app/services/user"
 import { generateToken, validatePassword } from "@/app/utils/jwt";
 import { genericErrorResponse, genericSuccessResponse } from "@/app/utils/responseMessage"
 
@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
         return genericErrorResponse("Invalid credentials", 401);  
       }
 
-    const token = generateToken({ id: user.id, roleId: user.roleId });
+    const token = generateToken({ id: user.id, roleId: user.role });
 
-    return genericSuccessResponse( token , "Login successful", 200);
+    return genericSuccessResponse( {token: token, role: user.roleId} , "Login successful", 200);
   } 
   catch (error) {
         return genericErrorResponse("Server error", 500);  

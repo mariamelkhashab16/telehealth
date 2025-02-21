@@ -20,3 +20,8 @@ export function validatePassword(requestPassword: string, userPassword: string)
 {
  return bcrypt.compare(requestPassword, userPassword)
 }
+
+export function hashPassword(inputPassword : string)
+{
+  return  bcrypt.hash(inputPassword, 10);
+}
