@@ -27,6 +27,10 @@ export default function LoginForm() {
       
       console.log(response.data)
       if (res.ok) { 
+        
+        localStorage.setItem("token",response.data.token)
+        localStorage.setItem("role",response.data.role)
+
         console.log(`/auth/${response.data.role}/home`)
         window.location.href = `/auth/${response.data.role}/home`;
       } else {
