@@ -12,7 +12,7 @@ export async function getUserByUsername(username: string) {
   }
 }
 
-export async function validateUserRole(user: User, role: Number) {
+export function validateUserRole(user: User, role: Number) {
   return user.roleId == role
   
 }

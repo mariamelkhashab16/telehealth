@@ -23,7 +23,11 @@ export default function AuthPage() {
                     //     pathname: "/auth/doctor",
                     //     query: { role: systemRoles?.find(role => role.name === 'doctor')?.id },
                     //   }}
-                    href={"/auth/doctor"}
+                    href={{
+                        pathname: "/auth/login",
+                        query: { role: 2 }, 
+                      }}
+
 
                     className="px-6 py-3 bg-green-500 text-white rounded-lg block text-center"
                 >

@@ -10,6 +10,7 @@ export default function LoginForm() {
  
   const role = useSearchParams().get("role"); 
 
+  console.log("role",role)
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault(); 
     setLoading(true);
