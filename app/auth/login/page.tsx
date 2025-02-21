@@ -1,12 +1,14 @@
 "use client"
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false); 
-
+ 
+  const role = useSearchParams().get("role"); 
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault(); 
@@ -16,15 +18,16 @@ export default function LoginForm() {
       const res = await fetch("/api/auth/login/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, role }),
       });
   
       const response = await res.json();
       setLoading(false);
       
       console.log(response.data)
-      if (res.ok) {
-        // window.location.href = "/auth/doctor"
+      if (res.ok) { 
+        console.log(`/auth/${response.data.role}/home`)
+        window.location.href = `/auth/${response.data.role}/home`;
       } else {
         setError(response.error || "An unknown error occurred.");
       }

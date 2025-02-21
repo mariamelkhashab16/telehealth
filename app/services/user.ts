@@ -1,5 +1,5 @@
 // src/services/userService.ts
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -10,6 +10,11 @@ export async function getUserByUsername(username: string) {
   } catch (error) {
     throw new Error("Error fetching user by username");
   }
+}
+
+export async function validateUserRole(user: User, role: Number) {
+  return user.roleId == role
+  
 }
 
 

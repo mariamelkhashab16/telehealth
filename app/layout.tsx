@@ -1,4 +1,6 @@
 import "./globals.css";
+import { SystemDataProvider } from "./context/systemDataContext";
+
 
 export const metadata = {
   title: 'Next.js',
@@ -11,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <SystemDataProvider>
     <html lang="en">
       <body>{children}</body>
     </html>
+  
+    </SystemDataProvider>  
   )
 }
